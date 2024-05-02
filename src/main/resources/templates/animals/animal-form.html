@@ -18,7 +18,7 @@
   <p class="h4 mb-4">Save Animal</p>
 
   <form action="#" th:action="@{/animals/save}" enctype="multipart/form-data"
-        th:object="${animals}" method="POST" >
+        th:object="${animals}" method="POST" onsubmit="return validateCaptcha()"  >
 
     <input type="hidden" th:field="*{id}">
 
@@ -64,7 +64,7 @@
     <div class="row mb-3">
       <div class="col-md-3">
         <label for="captcha">Captcha:</label>
-        <input type="text" class="form-control" id="captcha" name="captcha" th:if="${captcha != null}" th:value="${captcha}" readonly />
+        <input type="text" class="form-control" id="captcha" name="captcha" th:if="${captcha}" th:value="${captcha}" readonly />
       </div>
 
       <br>
@@ -101,6 +101,16 @@
       }
     }, 3000); // Adjust time in milliseconds (3 seconds here)
   });
+
+    function validateCaptcha() {
+    const captcha = document.getElementById("captcha").value;
+    const userCaptcha = document.getElementById("userCaptcha").value;
+    if (captcha !== userCaptcha) {
+      alert("Invalid Captcha! Please try again.");
+      return false; // prevent form submission
+    }
+    return true; // allow form submission
+  }
 </script>
 </body>
 </html>

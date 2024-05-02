@@ -96,7 +96,7 @@ public class AnimalController {
             return "redirect:/animals/list";
         }else{
             model.addAttribute("captchaError", "Invalid Captcha!");
-            model.addAttribute("animals", animals);
+            model.asMap().remove("animals", animals);
             model.addAttribute("captcha", generateRandomCaptcha(6));
             request.getSession().setAttribute("captcha", model.getAttribute("captcha"));
             return "animals/animal-form";
@@ -139,7 +139,6 @@ public class AnimalController {
     @GetMapping("/captcha")
     public String generateCaptcha(HttpServletRequest request,Model model){
         String captcha = generateRandomCaptcha(6);
-        request.getSession().setAttribute("captcha",captcha);
         model.addAttribute("captcha",captcha);
         return "animals/animal-form";
     }

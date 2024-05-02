@@ -57,7 +57,7 @@
     </tr>
     </thead>
     <tbody>
-
+    <tr th:each="animal : ${animals}">
        <td>
             <img style="width: 300px;height: 150px;" th:src="@{/animals/image/{animalId}(animalId=${animal.id})}" class="img-thumbnail" alt="Animal Image">
        </td>
