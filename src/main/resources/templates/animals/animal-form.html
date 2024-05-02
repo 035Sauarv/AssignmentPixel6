@@ -61,7 +61,7 @@
 
     <input type="file" name="file" id="file" class="form-control mb-4 form-control-medium" accept="image/*" required>
 
-    <div class="row mb-3">
+    <div class="row mb-3" >
       <div class="col-md-3">
         <label for="captcha">Captcha:</label>
         <input type="text" class="form-control" id="captcha" name="captcha" th:if="${captcha}" th:value="${captcha}" readonly />
@@ -69,8 +69,8 @@
 
       <br>
       <div class="col-md-3">
-        <label for="userCaptcha">Enter Captcha:</label>
-        <input type="text" class="form-control" id="userCaptcha" name="userCaptcha" placeholder="Enter captcha..." required />
+        <label >Enter Captcha:</label>
+        <input type="text" class="form-control" id="userCaptcha" placeholder="Enter captcha..." required />
       </div>
     </div>
 

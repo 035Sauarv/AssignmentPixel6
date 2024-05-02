@@ -1,5 +1,4 @@
 package com.saurav.animals.controllers;
-
 import com.saurav.animals.enitity.Animals;
 import com.saurav.animals.repository.AnimalRepository;
 import com.saurav.animals.service.AnimalService;
@@ -25,12 +24,10 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-
 @Controller
 @RequestMapping("/animals")
 public class AnimalController {
     private AnimalService animalService;
-
     @Autowired
     private AnimalRepository animalRepository;
 
@@ -47,17 +44,14 @@ public class AnimalController {
         return "animals/list-animals";
     }
 
-
     //search for the animal
     @GetMapping("/search")
-    public String search(@RequestParam("query") String query,Model model){
-        List<Animals>searchAnimals=  animalRepository.findByNameContaining(query);
-        List<Animals>searchCategory = animalRepository.findByCategoryContaining(query);
-        model.addAttribute("animals",searchAnimals);
-        model.addAttribute("animals",searchCategory);
+    public String search(@RequestParam("query") String query, Model model) {
+        List<Animals> searchAnimals = animalRepository.findByNameContainingOrCategoryContaining(query,query);
+        model.addAttribute("animals", searchAnimals);
+        model.addAttribute("query", query);
         return "animals/list-animals";
     }
-
 
     //sort for animal
     @GetMapping("/sort")
@@ -72,14 +66,13 @@ public class AnimalController {
         return "animals/list-animals";
     }
 
-
     // add animal
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model model, HttpServletRequest request) {
         Animals animals = new Animals();
         model.addAttribute("animals", animals);
         String captcha = generateRandomCaptcha(6);
-        model.addAttribute("captcha", captcha);
+//        model.addAttribute("captcha", captcha);
         request.getSession().setAttribute("captcha", captcha);
         return "animals/animal-form";
     }
@@ -88,28 +81,25 @@ public class AnimalController {
     @PostMapping("/save")
     public String saveAnimals(@ModelAttribute Animals animals,
                               @RequestParam("file") MultipartFile file,
-                              @RequestParam("captcha") String userCaptcha,
                               Model model,
                               HttpServletRequest request) throws IOException {
-        String sessionCaptcha = (String) request.getSession().getAttribute("captcha");
-        if(sessionCaptcha!= null&& sessionCaptcha.equals(userCaptcha)){
+
+            String captcha = generateRandomCaptcha(6);
+            request.getSession().setAttribute("captcha", captcha);
             animalService.save(animals, file);
             return "redirect:/animals/list";
-        }else{
-            model.addAttribute("captchaError", "Invalid Captcha!");
-            model.asMap().remove("animals", animals);
-            model.addAttribute("captcha", generateRandomCaptcha(6));
-            request.getSession().setAttribute("captcha", model.getAttribute("captcha"));
-            return "animals/animal-form";
-        }
+
     }
 
 
     // update animal
     @GetMapping("/showFormForUpdate")
-    public String updateAnimals(@RequestParam("animalId") long id , Model model){
+    public String updateAnimals(@RequestParam("animalId") long id , Model model,HttpServletRequest request){
         Animals animals = animalService.findById(id);
         model.addAttribute("animals",animals);
+
+        String captcha = generateRandomCaptcha(6);
+        request.getSession().setAttribute("captcha", captcha);
         return "animals/animal-form";
     }
 
@@ -137,12 +127,6 @@ public class AnimalController {
     }
 
 
-//    @GetMapping("/captcha")
-//    public String generateCaptcha(HttpServletRequest request,Model model){
-//        String captcha = generateRandomCaptcha(6);
-//        model.addAttribute("captcha",captcha);
-//        return "animals/animal-form";
-//    }
     private String generateRandomCaptcha
     (int length) {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -153,6 +137,5 @@ public class AnimalController {
         }
         return captcha.toString();
     }
-
 }
 

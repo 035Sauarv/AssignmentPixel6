@@ -12,6 +12,7 @@ public interface AnimalRepository  extends JpaRepository<Animals,Long> {
     // search for name
     List<Animals> findByNameContaining(String query);
 
+    List<Animals> findByNameContainingOrCategoryContaining(String name,String category);
     // search for animal category
     List<Animals> findByCategoryContaining(String query);
 
