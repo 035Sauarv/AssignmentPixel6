@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <style>
-    /* Adjusting form width to medium size */
     .form-control-medium {
       max-width: 400px;
     }
@@ -31,6 +30,7 @@
       <input class="form-check-input" type="radio" th:field="*{category}" th:value="Fish" id="categoryFish" >
       <label class="form-check-label" for="categoryFish">Fish</label>
     </div>
+
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="radio" th:field="*{category}" th:value="Bird" id="categoryBird" >
       <label class="form-check-label" for="categoryBird">Bird</label>
@@ -92,24 +92,6 @@
 
 </div>
 
-<!--<script>-->
-<!--    document.querySelector('form').addEventListener('submit', function(event) {-->
-<!--        event.preventDefault(); // Prevent form submission-->
-<!--        var captchaInput = document.getElementById('captchaInput').value;-->
-<!--        fetch('/animals/captcha')-->
-<!--            .then(response => response.text())-->
-<!--            .then(captcha => {-->
-<!--                if (captchaInput === captcha) {-->
-<!--                    // If CAPTCHA matches, submit the form-->
-<!--                    event.target.submit();-->
-<!--                } else {-->
-<!--                    // If CAPTCHA doesn't match, display error message-->
-<!--                    alert('CAPTCHA is incorrect. Please try again.');-->
-<!--                }-->
-<!--            })-->
-<!--            .catch(error => console.error('Error:', error));-->
-<!--    });-->
-<!--</script>-->
 <script th:inline="javascript">
   document.addEventListener("DOMContentLoaded", function() {
     setTimeout(function() {

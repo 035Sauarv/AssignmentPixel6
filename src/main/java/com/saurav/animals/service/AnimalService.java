@@ -9,7 +9,9 @@ import java.util.Optional;
 
 public interface AnimalService {
 
+    // save animal with image
     Animals save(Animals animals, MultipartFile multipartFile) throws IOException;
+
 
     List<Animals> findAll();
 

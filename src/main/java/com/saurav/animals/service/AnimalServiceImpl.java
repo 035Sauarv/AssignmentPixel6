@@ -25,16 +25,6 @@ public class AnimalServiceImpl implements AnimalService{
 
     @Override
     public Animals save(Animals theAnimals, MultipartFile file) throws IOException {
-//        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-//        if(fileName.contains(".."))
-//        {
-//            System.out.println("not a a valid file");
-//        }
-//        try {
-//            theAnimals.setImage(Arrays.toString(file.getBytes()));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         theAnimals.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
         return animalRepository.save(theAnimals);
     }

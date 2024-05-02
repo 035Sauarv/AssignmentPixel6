@@ -38,6 +38,7 @@ public class AnimalController {
         this.animalService = theAnimalService;
     }
 
+    //list of the animals
     @GetMapping("/list")
     public String showAnimals(Model model) {
         List<Animals> animals = animalService.findAll();
@@ -45,6 +46,8 @@ public class AnimalController {
         return "animals/list-animals";
     }
 
+
+    //search for the animal
     @GetMapping("/search")
     public String search(@RequestParam("query") String query,Model model){
         List<Animals>searchAnimals=  animalRepository.findByNameContaining(query);
@@ -54,6 +57,8 @@ public class AnimalController {
         return "animals/list-animals";
     }
 
+
+    //sort for animal
     @GetMapping("/sort")
     public String sort(@RequestParam(name = "sort", defaultValue = "asc") String sort, Model model) {
         List<Animals> sortedAnimals;
@@ -66,6 +71,8 @@ public class AnimalController {
         return "animals/list-animals";
     }
 
+
+    // add animal
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model model, HttpServletRequest request) {
         Animals animals = new Animals();
@@ -76,6 +83,7 @@ public class AnimalController {
         return "animals/animal-form";
     }
 
+    // save animal
     @PostMapping("/save")
     public String saveAnimals(@ModelAttribute Animals animals,
                               @RequestParam("file") MultipartFile file,
@@ -93,10 +101,10 @@ public class AnimalController {
             request.getSession().setAttribute("captcha", model.getAttribute("captcha"));
             return "animals/animal-form";
         }
-
     }
 
 
+    // update animal
     @GetMapping("/showFormForUpdate")
     public String updateAnimals(@RequestParam("animalId") long id , Model model){
         Animals animals = animalService.findById(id);
@@ -104,6 +112,7 @@ public class AnimalController {
         return "animals/animal-form";
     }
 
+    // image of animal in blob
     @GetMapping(value = "/image/{animalId}")
     @ResponseBody
     public ResponseEntity<byte[]> getAnimalImage(@PathVariable Long animalId){
@@ -119,7 +128,7 @@ public class AnimalController {
         }
     }
 
-
+    //delete for animal
     @GetMapping("/delete")
     public String delete(@RequestParam("animalId") long id){
         animalService.deleteById(id);
