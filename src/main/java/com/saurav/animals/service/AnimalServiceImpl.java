@@ -3,6 +3,9 @@ package com.saurav.animals.service;
 import com.saurav.animals.enitity.Animals;
 import com.saurav.animals.repository.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

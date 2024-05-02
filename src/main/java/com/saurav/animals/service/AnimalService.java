@@ -1,6 +1,7 @@
 package com.saurav.animals.service;
 
 import com.saurav.animals.enitity.Animals;
+import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -20,5 +21,5 @@ public interface AnimalService {
 
     void deleteById(long id);
 
-//    List<Animals> searchAnimals(String query);
+
 }

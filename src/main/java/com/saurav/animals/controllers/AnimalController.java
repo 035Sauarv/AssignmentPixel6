@@ -6,6 +6,7 @@ import com.saurav.animals.service.AnimalService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
@@ -136,13 +137,14 @@ public class AnimalController {
     }
 
 
-    @GetMapping("/captcha")
-    public String generateCaptcha(HttpServletRequest request,Model model){
-        String captcha = generateRandomCaptcha(6);
-        model.addAttribute("captcha",captcha);
-        return "animals/animal-form";
-    }
-    private String generateRandomCaptcha(int length) {
+//    @GetMapping("/captcha")
+//    public String generateCaptcha(HttpServletRequest request,Model model){
+//        String captcha = generateRandomCaptcha(6);
+//        model.addAttribute("captcha",captcha);
+//        return "animals/animal-form";
+//    }
+    private String generateRandomCaptcha
+    (int length) {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         StringBuilder captcha = new StringBuilder();
         Random random = new Random();

@@ -93,14 +93,7 @@
 </div>
 
 <script th:inline="javascript">
-  document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(function() {
-      var errorElement = document.getElementById("captchaError");
-      if (errorElement) {
-        errorElement.parentNode.removeChild(errorElement);
-      }
-    }, 3000); // Adjust time in milliseconds (3 seconds here)
-  });
+
 
     function validateCaptcha() {
     const captcha = document.getElementById("captcha").value;
