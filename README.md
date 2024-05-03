@@ -10,3 +10,8 @@ spring.datasource.password = Saurav@353535 // replace your mysql password
 
 
 step 4) run this file =  AnimalsApplication 
+
+If server is not running on port 8080 then un-comment the following line in application.properties
+#server.port = 8090
+
+
