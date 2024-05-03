@@ -1,9 +1,7 @@
 package com.saurav.animals.service;
 
 import com.saurav.animals.enitity.Animals;
-import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -13,12 +11,9 @@ public interface AnimalService {
     // save animal with image
     Animals save(Animals animals, MultipartFile multipartFile) throws IOException;
 
-
-    List<Animals> findAll();
-
+    List<Animals> findAllAnimals();
     Animals findById(Long id);
     Optional<Animals>findAnimals(Long id);
-
     void deleteById(long id);
 
 

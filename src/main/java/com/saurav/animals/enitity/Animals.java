@@ -2,9 +2,6 @@ package com.saurav.animals.enitity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Type;
-
-import java.util.Arrays;
 import java.util.Date;
 
 @Entity

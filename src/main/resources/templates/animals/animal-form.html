@@ -74,11 +74,6 @@
       </div>
     </div>
 
-    <div class="row" th:if="${captchaError != null}">
-      <div class="col-md-12">
-        <span class="text-danger" th:text="${captchaError}"></span>
-      </div>
-    </div>
     <br>
 
 
@@ -93,17 +88,16 @@
 </div>
 
 <script th:inline="javascript">
-
-
     function validateCaptcha() {
     const captcha = document.getElementById("captcha").value;
     const userCaptcha = document.getElementById("userCaptcha").value;
     if (captcha !== userCaptcha) {
       alert("Invalid Captcha! Please try again.");
-      return false; // prevent form submission
+      return false;
     }
-    return true; // allow form submission
+    return true;
   }
 </script>
+
 </body>
 </html>
