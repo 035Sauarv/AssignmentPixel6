@@ -23,8 +23,11 @@
     <input type="hidden" th:field="*{id}">
 
     <input type="text" th:field="*{name}"
-           class="form-control mb-4 form-control-medium" placeholder="Enter name" required>
+           class="form-control mb-4 form-control-medium " placeholder="Enter name" >
+    <span th:if="${error !=null}" class="text-danger">[[${error}]]</span>
 
+    <br>
+<br>
     <label>Categories :- </label><br>
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="radio" th:field="*{category}" th:value="Fish" id="categoryFish" >
@@ -61,10 +64,12 @@
 
     <input type="file" name="file" id="file" class="form-control mb-4 form-control-medium" accept="image/*" required>
 
+
+
     <div class="row mb-3" >
       <div class="col-md-3">
         <label for="captcha">Captcha:</label>
-        <input type="text" class="form-control" id="captcha" name="captcha" th:if="${captcha}" th:value="${captcha}" readonly />
+        <input type="text" class="form-control text-danger" id="captcha" name="captcha" th:if="${captcha}" th:value="${captcha}" readonly />
       </div>
 
       <br>
@@ -87,16 +92,8 @@
 
 </div>
 
-<script th:inline="javascript">
-    function validateCaptcha() {
-    const captcha = document.getElementById("captcha").value;
-    const userCaptcha = document.getElementById("userCaptcha").value;
-    if (captcha !== userCaptcha) {
-      alert("Invalid Captcha! Please try again.");
-      return false;
-    }
-    return true;
-  }
+<script src="/js/main.js">
+
 </script>
 
 </body>

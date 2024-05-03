@@ -70,18 +70,24 @@ public class AnimalController {
 
     // save animal
     @PostMapping("/save")
-    public String saveAnimals(@ModelAttribute Animals animals,
+    public String saveAnimals(@ModelAttribute  Animals animals,
                               @RequestParam("file") MultipartFile file,
                               Model model,
                               HttpServletRequest request) throws IOException {
 
-            String captcha = generateRandomCaptcha(6);
-            request.getSession().setAttribute("captcha", captcha);
-            animalService.save(animals, file);
-            return "redirect:/animals/list";
-
+                if(animals.getName()==null || animals.getName().isEmpty()){
+                    model.addAttribute("error","Name is required");
+                    String captcha = generateRandomCaptcha(6);
+                    model.addAttribute("captcha", captcha);
+                    request.getSession().setAttribute("captcha", captcha);
+                    return "animals/animal-form";
+                }else{
+                String captcha = generateRandomCaptcha(6);
+                request.getSession().setAttribute("captcha", captcha);
+                animalService.save(animals, file);
+                return "redirect:/animals/list";
+        }
     }
-
 
     // update animal
     @GetMapping("/showFormForUpdate")

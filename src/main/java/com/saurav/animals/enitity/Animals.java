@@ -1,7 +1,10 @@
 package com.saurav.animals.enitity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.util.Date;
 
 @Entity
@@ -17,7 +20,9 @@ public class Animals {
     @Column(name="id")
     private Long id;
 
+
     @Column(name="name")
+    @NotNull(message = "Name not empty")
     private String name;
 
     @Column(name="category",columnDefinition = "TEXT")
